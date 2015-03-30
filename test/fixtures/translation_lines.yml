@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  translation_file_id: 
+  translation_id: MyString
+  description: MyString
+
+two:
+  translation_file_id: 
+  translation_id: MyString
+  description: MyString
