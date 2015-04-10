@@ -1,12 +1,22 @@
 Rails.application.routes.draw do
   resources :translated_lines
   resources :languages
-  resources :translation_lines
+  resources :translation_lines do
+    member do
+      get 'previous'
+      get 'next'
+    end
+
+    collection do
+      get 'random'
+      get 'random_untranslated'
+    end
+  end
   resources :translation_files
   devise_for :users
   resources :users
 
-  root to: "users#index"
+  root to: "translation_files#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

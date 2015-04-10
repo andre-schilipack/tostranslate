@@ -28,10 +28,13 @@ class TranslatedLinesController < ApplicationController
 
     respond_to do |format|
       if @translated_line.save
+        @translated_lines = TranslatedLine.where(translation_code: @translated_line.translation_code)
         format.html { redirect_to @translated_line, notice: 'Translated line was successfully created.' }
+        format.js {}
         format.json { render :show, status: :created, location: @translated_line }
       else
         format.html { render :new }
+        format.js {}
         format.json { render json: @translated_line.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +72,6 @@ class TranslatedLinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def translated_line_params
-      params.require(:translated_line).permit(:translation_line_id, :description, :language_id)
+      params.require(:translated_line).permit(:translation_code, :description)
     end
 end

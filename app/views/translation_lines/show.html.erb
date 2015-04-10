@@ -6,14 +6,41 @@
 </p>
 
 <p>
-  <strong>Translation:</strong>
-  <%= @translation_line.translation_id %>
+  <strong>Translation code:</strong>
+  <%= @translation_line.translation_code %>
 </p>
 
 <p>
   <strong>Description:</strong>
   <%= @translation_line.description %>
 </p>
+
+<%= form_for(@translated_line, remote: true) do |f| %>
+  <h1>Translation:</h1>
+  <div class="field">
+    <%= f.hidden_field :translation_code, value: @translation_line.translation_code %>
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+
+<div id="translation-list">
+  <% @translated_lines.each do |translated_line| %>
+    <p><%= translated_line.description %></p>
+  <% end %>
+</div>
+
+<div id="actions">
+  <%= link_to 'Prev', previous_translation_line_path %>
+  <%= link_to 'Next', next_translation_line_path %>
+  <%= link_to 'Random', random_translation_lines_path %>
+  <%= link_to 'Random untranslated', random_untranslated_translation_lines_path %>
+</div>
 
 <%= link_to 'Edit', edit_translation_line_path(@translation_line) %> |
 <%= link_to 'Back', translation_lines_path %>

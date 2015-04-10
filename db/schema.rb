@@ -20,15 +20,14 @@ ActiveRecord::Schema.define(version: 20150330012517) do
   end
 
   create_table "translated_lines", force: :cascade do |t|
-    t.integer  "translation_line_id", limit: 4
-    t.string   "description",         limit: 255
-    t.integer  "language_id",         limit: 4
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.string   "translation_code", limit: 255
+    t.text     "description",      limit: 65535
+    t.integer  "language_id",      limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   add_index "translated_lines", ["language_id"], name: "index_translated_lines_on_language_id", using: :btree
-  add_index "translated_lines", ["translation_line_id"], name: "index_translated_lines_on_translation_line_id", using: :btree
 
   create_table "translation_files", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -38,10 +37,11 @@ ActiveRecord::Schema.define(version: 20150330012517) do
 
   create_table "translation_lines", force: :cascade do |t|
     t.integer  "translation_file_id", limit: 4
-    t.string   "translation_id",      limit: 255
-    t.string   "description",         limit: 255
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.string   "translation_code",    limit: 255
+    t.text     "description",         limit: 65535
+    t.boolean  "translated",          limit: 1
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "translation_lines", ["translation_file_id"], name: "index_translation_lines_on_translation_file_id", using: :btree
@@ -66,6 +66,5 @@ ActiveRecord::Schema.define(version: 20150330012517) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "translated_lines", "languages"
-  add_foreign_key "translated_lines", "translation_lines"
   add_foreign_key "translation_lines", "translation_files"
 end

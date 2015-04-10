@@ -1,5 +1,5 @@
 class TranslationLinesController < ApplicationController
-  before_action :set_translation_line, only: [:show, :edit, :update, :destroy]
+  before_action :set_translation_line, only: [:show, :edit, :update, :destroy, :previous, :next]
 
   # GET /translation_lines
   # GET /translation_lines.json
@@ -10,6 +10,8 @@ class TranslationLinesController < ApplicationController
   # GET /translation_lines/1
   # GET /translation_lines/1.json
   def show
+    @translated_line = TranslatedLine.new
+    @translated_lines = TranslatedLine.where(translation_code: @translation_line.translation_code)
   end
 
   # GET /translation_lines/new
@@ -58,6 +60,45 @@ class TranslationLinesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to translation_lines_url, notice: 'Translation line was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /translation_lines/1/previous
+  def previous
+    @translation_line = TranslationLine.where("id < ?", @translation_line.id).first
+
+    respond_to do |format|
+      format.html { redirect_to translation_line_path(@translation_line.id)}
+    end
+  end
+
+  # GET /translation_lines/1/next
+  def next
+    @translation_line = TranslationLine.where("id > ?", @translation_line.id).first
+
+    respond_to do |format|
+      format.html { redirect_to translation_line_path(@translation_line.id)}
+    end
+  end
+
+  # GET /translation_lines/random
+  def random
+    offset = rand(TranslationLine.count)
+    @translation_line = TranslationLine.offset(offset).first
+
+    respond_to do |format|
+      format.html { redirect_to translation_line_path(@translation_line.id)}
+    end
+  end
+
+  # GET /translation_lines/random_untranslated
+  def random_untranslated
+    translation_lines = TranslationLine.where(translated: false)
+    offset = rand(translation_lines.count)
+    @translation_line = translation_lines.offset(offset).first
+
+    respond_to do |format|
+      format.html { redirect_to translation_line_path(@translation_line.id)}
     end
   end
 

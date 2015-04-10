@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Translation file</th>
-      <th>Translation</th>
+      <th>Translation code</th>
       <th>Description</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +16,7 @@
     <% @translation_lines.each do |translation_line| %>
       <tr>
         <td><%= translation_line.translation_file %></td>
-        <td><%= translation_line.translation_id %></td>
+        <td><%= translation_line.translation_code %></td>
         <td><%= translation_line.description %></td>
         <td><%= link_to 'Show', translation_line %></td>
         <td><%= link_to 'Edit', edit_translation_line_path(translation_line) %></td>

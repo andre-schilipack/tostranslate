@@ -1,3 +1,4 @@
+#encoding: utf-8
 class TranslationFilesController < ApplicationController
   before_action :set_translation_file, only: [:show, :edit, :update, :destroy]
 
@@ -24,7 +25,9 @@ class TranslationFilesController < ApplicationController
   # POST /translation_files
   # POST /translation_files.json
   def create
-    @translation_file = TranslationFile.new(translation_file_params)
+    @translation_file = TranslationFile.new()
+    @translation_file.name = translation_file_params[:name]
+    @translation_file.file = translation_file_params[:file]
 
     respond_to do |format|
       if @translation_file.save
@@ -69,6 +72,6 @@ class TranslationFilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def translation_file_params
-      params.require(:translation_file).permit(:name)
+      params.require(:translation_file).permit(:name, :file)
     end
 end

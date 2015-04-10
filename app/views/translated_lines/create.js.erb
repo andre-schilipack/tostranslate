@@ -1,0 +1,7 @@
+$("#translation-list").html("");
+
+<% @translated_lines.each do |translated_line| %>
+  $("#translation-list").append("<p><%= translated_line.description %></p>");
+<% end %>
+
+$("#actions").show();
