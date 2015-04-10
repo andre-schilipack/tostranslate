@@ -5,6 +5,9 @@ class TranslationLinesController < ApplicationController
   # GET /translation_lines.json
   def index
     @translation_lines = TranslationLine.all
+    if params[:translation_code].present?
+      @translation_lines = @translation_lines.where("translation_code = ?", params[:translation_code])
+    end
   end
 
   # GET /translation_lines/1
@@ -68,7 +71,11 @@ class TranslationLinesController < ApplicationController
     @translation_line = TranslationLine.where("id < ?", @translation_line.id).first
 
     respond_to do |format|
-      format.html { redirect_to translation_line_path(@translation_line.id)}
+      if @translation_line.present?
+        format.html { redirect_to translation_line_path(@translation_line.id) }
+      else
+        format.html { redirect_to translation_lines_path }
+      end
     end
   end
 
@@ -77,7 +84,11 @@ class TranslationLinesController < ApplicationController
     @translation_line = TranslationLine.where("id > ?", @translation_line.id).first
 
     respond_to do |format|
-      format.html { redirect_to translation_line_path(@translation_line.id)}
+      if @translation_line.present?
+        format.html { redirect_to translation_line_path(@translation_line.id) }
+      else
+        format.html { redirect_to translation_lines_path }
+      end
     end
   end
 
@@ -98,7 +109,11 @@ class TranslationLinesController < ApplicationController
     @translation_line = translation_lines.offset(offset).first
 
     respond_to do |format|
-      format.html { redirect_to translation_line_path(@translation_line.id)}
+      if @translation_line.present?
+        format.html { redirect_to translation_line_path(@translation_line.id) }
+      else
+        format.html { redirect_to translation_lines_path }
+      end
     end
   end
 

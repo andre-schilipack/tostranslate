@@ -4,10 +4,6 @@ class TranslationLine < ActiveRecord::Base
 
   after_create :verify_translated
 
-  def translated?
-    self.translated
-  end
-
   private
 
   def verify_translated
