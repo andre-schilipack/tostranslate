@@ -68,7 +68,7 @@ class TranslationLinesController < ApplicationController
 
   # GET /translation_lines/1/previous
   def previous
-    @translation_line = TranslationLine.where("id < ?", @translation_line.id).first
+    @translation_line = TranslationLine.where("id < ?", @translation_line.id).last
 
     respond_to do |format|
       if @translation_line.present?
