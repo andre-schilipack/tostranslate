@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Percentage</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
     <% @translation_files.each do |translation_file| %>
       <tr>
         <td><%= translation_file.name %></td>
+        <td><%= translation_file.percentage.round(2) %>%</td>
         <td><%= link_to 'Show', translation_file %></td>
         <td><%= link_to 'Edit', edit_translation_file_path(translation_file) %></td>
         <td><%= link_to 'Destroy', translation_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
