@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Translated Files</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Translation file</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @translated_files.each do |translated_file| %>
+      <tr>
+        <td><%= translated_file.translation_file %></td>
+        <td><%= translated_file.name %></td>
+        <td><%= link_to 'Show', translated_file %></td>
+        <td><%= link_to 'Edit', edit_translated_file_path(translated_file) %></td>
+        <td><%= link_to 'Destroy', translated_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Translated file', new_translated_file_path %>

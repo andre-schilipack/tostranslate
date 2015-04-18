@@ -11,6 +11,11 @@ class TranslationFilesController < ApplicationController
   # GET /translation_files/1
   # GET /translation_files/1.json
   def show
+    @translation_lines = @translation_file.translation_lines
+
+    if params[:translation_code].present?
+      @translation_lines = @translation_lines.where("translation_code = ?", params[:translation_code])
+    end
   end
 
   # GET /translation_files/new

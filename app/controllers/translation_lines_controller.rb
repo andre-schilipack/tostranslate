@@ -5,9 +5,6 @@ class TranslationLinesController < ApplicationController
   # GET /translation_lines.json
   def index
     @translation_lines = TranslationLine.all
-    if params[:translation_code].present?
-      @translation_lines = @translation_lines.where("translation_code = ?", params[:translation_code])
-    end
   end
 
   # GET /translation_lines/1

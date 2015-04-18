@@ -1,5 +1,6 @@
 class TranslatedLine < ActiveRecord::Base
   belongs_to :language
+  belongs_to :translated_file
   # belongs_to :translation_line, foreign_key: "translation_code"
 
   before_create :set_language

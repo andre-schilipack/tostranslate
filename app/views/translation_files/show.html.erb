@@ -5,5 +5,41 @@
   <%= @translation_file.name %>
 </p>
 
+<h1>Listing Translation Lines</h1>
+
+<%= form_tag(translation_lines_path, method: :get) do %>
+  <input type="text" name="translation_code" placeholder="filter by translation code">
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Translation file</th>
+      <th>Translation code</th>
+      <th>Description</th>
+      <th>Translated?</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @translation_lines.each do |translation_line| %>
+      <tr>
+        <td><%= translation_line.translation_file.name %></td>
+        <td><%= translation_line.translation_code %></td>
+        <td><%= translation_line.description %></td>
+        <td><%= translation_line.translated %></td>
+        <td><%= link_to 'Show', translation_line %></td>
+        <td><%= link_to 'Edit', edit_translation_line_path(translation_line) %></td>
+        <td><%= link_to 'Destroy', translation_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<a href="">
+  botao para show de translated_file que eh possivel selecionar as translated_lines e entao expoetar tsv
+</a>
+
 <%= link_to 'Edit', edit_translation_file_path(@translation_file) %> |
 <%= link_to 'Back', translation_files_path %>

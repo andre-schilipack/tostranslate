@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :translated_files
   resources :translated_lines
   resources :languages
   resources :translation_lines do
