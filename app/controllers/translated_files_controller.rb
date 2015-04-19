@@ -1,5 +1,6 @@
 class TranslatedFilesController < ApplicationController
   before_action :set_translated_file, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /translated_files
   # GET /translated_files.json

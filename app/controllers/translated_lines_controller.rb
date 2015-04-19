@@ -1,5 +1,6 @@
 class TranslatedLinesController < ApplicationController
   before_action :set_translated_line, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /translated_lines
   # GET /translated_lines.json

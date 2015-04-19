@@ -1,6 +1,7 @@
 class TranslationLinesController < ApplicationController
   before_action :set_translation_line, only: [:show, :edit, :update, :destroy, :previous, :next]
-
+  load_and_authorize_resource
+  
   # GET /translation_lines
   # GET /translation_lines.json
   def index

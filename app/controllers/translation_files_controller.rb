@@ -1,7 +1,8 @@
 #encoding: utf-8
 class TranslationFilesController < ApplicationController
   before_action :set_translation_file, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /translation_files
   # GET /translation_files.json
   def index

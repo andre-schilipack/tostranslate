@@ -1,5 +1,6 @@
 class LanguagesController < ApplicationController
   before_action :set_language, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /languages
   # GET /languages.json
